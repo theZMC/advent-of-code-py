@@ -24,3 +24,14 @@ jobs:
       uses: renovatebot/github-action@v44.0.4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        RENOVATE_CONFIG: |
+          {
+            "platform": "github",
+            "endpoint": "https://api.github.com",
+            "token": "env:RENOVATE_TOKEN",
+            "repositories": ["${{ github.repository }}"],
+            "extends": ["config:recommended"],
+            "onboarding": true,
+            "requireConfig": "optional"
+          }
