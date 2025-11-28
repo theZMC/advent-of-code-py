@@ -1,6 +1,9 @@
 on:
   schedule:
   - cron: 0 0 * * 0 # Runs every Sunday at midnight
+  issues:
+    types:
+    - edited
   push:
     branches:
     - main
@@ -10,6 +13,15 @@ name: Renovate
 
 jobs:
   renovate:
+    if: |
+      github.event_name != 'issues' ||
+      (
+        github.event_name == 'issues' &&
+        github.event.action == 'edited' &&
+        github.actor != 'github-actions[bot]' &&
+        contains(github.event.issue.title, 'Dependency Dashboard')
+      )
+    runs-on: ubuntu-latest
     permissions:
       statuses: write
       contents: write
@@ -19,7 +31,6 @@ jobs:
       repository-projects: write
       actions: write
 
-    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v5
