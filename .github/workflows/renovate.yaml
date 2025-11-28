@@ -1,20 +1,15 @@
 on:
   schedule:
   - cron: 0 0 * * 0 # Runs every Sunday at midnight
-  workflow_dispatch:
-  pull_request:
-    types:
-    - closed
+  push:
     branches:
     - main
+  workflow_dispatch:
 
 name: Renovate
 
 jobs:
   renovate:
-    if: >
-      github.event_name != 'pull_request' ||
-      !startsWith(github.head_ref, 'renovate/')
     permissions:
       statuses: write
       contents: write
