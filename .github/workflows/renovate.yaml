@@ -25,11 +25,11 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
       env:
+        LOG_LEVEL: debug
         RENOVATE_CONFIG: |
           {
             "platform": "github",
             "endpoint": "https://api.github.com",
-            "token": "env:RENOVATE_TOKEN",
             "repositories": ["${{ github.repository }}"],
             "extends": ["config:recommended"],
             "onboarding": true,
