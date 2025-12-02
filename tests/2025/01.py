@@ -1,9 +1,9 @@
 import importlib
 
-day01 = importlib.import_module("years.2025.01")
-
 
 def test_day1():
+    day01 = importlib.import_module("years.2025.01")
+
     input = """L68
 L30
 R48

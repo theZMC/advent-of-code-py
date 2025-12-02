@@ -7,11 +7,23 @@ from questionary import select
 from requests import post
 
 SOLUTION_TEMPLATE = """def part1(input: str) -> str:
-    return ""
+    return input
 
 
 def part2(input: str) -> str:
-    return ""
+    return input
+"""
+
+TEST_TEMPLATE = """import importlib
+
+
+def test_day{day:02d}():
+    day{day:02d} = importlib.import_module("years.{year}.{day:02d}")
+
+    input = ""
+
+    assert day{day:02d}.part1(input) == ""
+    assert day{day:02d}.part2(input) == ""
 """
 
 
@@ -90,7 +102,14 @@ def create_blank(year: str, day: str):
     with open(day_file, "w") as f:
         f.write(SOLUTION_TEMPLATE)
 
-    print(f"Created new solution template at {day_file}")
+    test_path = Path("tests") / year
+    test_path.mkdir(parents=True, exist_ok=True)
+    test_file = test_path / f"{day.zfill(2)}.py"
+
+    with open(test_file, "w") as f:
+        f.write(TEST_TEMPLATE.format(day=int(day), year=int(year)))
+
+    print(f"Created new solution template at {day_file} and a test file at {test_file}")
 
 
 def submit(year: str, day: str, session: str, part1: str, part2: str):
