@@ -104,7 +104,7 @@ def create_blank(year: str, day: str):
 
     test_path = Path("tests") / year
     test_path.mkdir(parents=True, exist_ok=True)
-    test_file = test_path / f"{day.zfill(2)}.py"
+    test_file = test_path / f"{day.zfill(2)}_test.py"
 
     with open(test_file, "w") as f:
         f.write(TEST_TEMPLATE.format(day=int(day), year=int(year)))
