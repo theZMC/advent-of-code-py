@@ -30,6 +30,7 @@ jobs:
       checks: write
       repository-projects: write
       actions: write
+      workflows: write
 
     steps:
     - name: Checkout
