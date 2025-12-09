@@ -83,6 +83,8 @@ def prompt(args) -> tuple[str, str, Solution]:
         .ask()
     )
 
+    day = day.zfill(2)
+
     return year, day, solutions[year][day]
 
 
