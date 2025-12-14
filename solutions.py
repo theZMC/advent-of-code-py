@@ -7,11 +7,11 @@ from questionary import select
 from requests import post
 
 SOLUTION_TEMPLATE = """def part1(input: str) -> str:
-    return input
+    return ""
 
 
 def part2(input: str) -> str:
-    return input
+    return ""
 """
 
 TEST_TEMPLATE = """import importlib
@@ -84,6 +84,9 @@ def prompt(args) -> tuple[str, str, Solution]:
     )
 
     day = day.zfill(2)
+
+    if not solutions[year].get(day):
+        raise ValueError(f"Solution for Year {year} Day {day} not found.")
 
     return year, day, solutions[year][day]
 
